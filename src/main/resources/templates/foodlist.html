@@ -562,7 +562,8 @@ fetch('/all')
       data.forEach(item => {
           foodList.innerHTML += `
             <div class="food-card">
-                <img src="${item.image}" alt="${item.name}">
+            <img src="https://your-app.onrender.com${item.image}" />
+               
                 <div class="content">
                     <h3>${item.name}</h3>
                     <p class="restaurant-name">${item.restaurantsName}</p>
