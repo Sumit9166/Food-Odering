@@ -21,7 +21,6 @@ body {
     justify-content: center;
     align-items: center;
 
-    /* 🔥 FOOD APP BACKGROUND */
     background: linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.70)),
     url("https://images.unsplash.com/photo-1521305916504-4a1121188589?auto=format&fit=crop&w=1400&q=80")
     no-repeat center center/cover;
@@ -41,6 +40,26 @@ body {
     border: 1px solid rgba(255,255,255,0.25);
     box-shadow: 0 20px 45px rgba(0,0,0,0.35);
     text-align: center;
+
+    /* 🔥 Added */
+    position: relative;
+}
+
+/* 🔥 CLOSE BUTTON */
+.close-btn {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    font-size: 22px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close-btn:hover {
+    color: #ff4d4d;
+    transform: scale(1.2);
 }
 
 /* Title */
@@ -121,6 +140,9 @@ body {
 
 <div class="container">
 
+    <!-- 🔥 CLOSE BUTTON -->
+    <div class="close-btn" onclick="goBack()">✖</div>
+
     <h2>User Registration</h2>
     <p class="subtitle">Create your account and start ordering delicious food.</p>
 
@@ -141,13 +163,11 @@ body {
                placeholder="Delivery Address" required>
     </div>
 
-    <!-- 🔐 PASSWORD FIELD -->
     <div class="input-box">
         <input type="password" th:field="*{Password}"
                placeholder="Create Password" required>
     </div>
 
-    <!-- 🔐 CONFIRM PASSWORD (optional but recommended) -->
     <div class="input-box">
         <input type="password" name="confirmPassword"
                placeholder="Confirm Password" required>
@@ -162,6 +182,13 @@ body {
     </div>
 
 </div>
+
+<script>
+// 🔥 CLOSE BUTTON FUNCTION
+function goBack() {
+    window.history.back(); 
+}
+</script>
 
 </body>
 </html>

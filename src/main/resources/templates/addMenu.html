@@ -37,6 +37,26 @@ body {
     border: 1px solid rgba(255,255,255,0.25);
     box-shadow: 0 20px 45px rgba(0,0,0,0.35);
     text-align: center;
+
+    /* 🔥 Added */
+    position: relative;
+}
+
+/* 🔥 CLOSE BUTTON */
+.close-btn {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    font-size: 22px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close-btn:hover {
+    color: #ff4d4d;
+    transform: scale(1.2);
 }
 
 .restaurant-name {
@@ -170,16 +190,15 @@ body {
 
 <div class="container">
 
-    <!-- Updated Name -->
+    <!-- 🔥 CLOSE BUTTON -->
+    <div class="close-btn" onclick="goBack()">✖</div>
+
     <div class="restaurant-name">Foodies Hub 🍴</div>
 
-    <!-- Dynamic name (unchanged logic) -->
     <div class="restaurant-name" th:text="${restaurantName}"></div> 
 
-    <!-- Updated Subtitle -->
     <p class="subtitle">Create and manage your menu with ease. Add dishes that delight your customers.</p>
 
-    <!-- Updated Heading -->
     <h2>Add New Dish</h2>
 
     <form th:action="@{/addMenu}"
@@ -219,14 +238,19 @@ body {
                    accept="image/*">
         </div>
 
-        <!-- Updated Button -->
         <button type="submit" class="submit-btn">Save Dish</button>
     </form>
 
-    <!-- Updated Note -->
     <p class="note">A great menu creates a great first impression.</p>
 
 </div>
+
+<script>
+// 🔥 CLOSE BUTTON FUNCTION
+function goBack(){
+    window.history.back();
+}
+</script>
 
 </body>
 </html>

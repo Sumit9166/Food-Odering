@@ -43,6 +43,26 @@ body {
         inset 0 0 30px rgba(255,255,255,0.05);
     text-align: center;
     animation: fadeUp 0.8s ease;
+
+    /* 🔥 Added */
+    position: relative;
+}
+
+/* 🔥 CLOSE BUTTON */
+.close-btn {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    font-size: 22px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close-btn:hover {
+    color: #ff4d4d;
+    transform: scale(1.2);
 }
 
 /* Heading */
@@ -55,7 +75,7 @@ body {
     margin-bottom: 10px;
 }
 
-/* Subtitle (UPDATED 🔥) */
+/* Subtitle */
 .subtitle {
     color: #e0e0e0;
     font-size: 14px;
@@ -173,9 +193,12 @@ body {
 <body>
 
 <div class="login-container">
+
+    <!-- 🔥 CLOSE BUTTON -->
+    <div class="close-btn" onclick="goBack()">✖</div>
+
     <h2>Restaurant Login</h2>
 
-    <!-- 🔥 UPDATED TEXT -->
     <p class="subtitle">
         Access your restaurant dashboard, manage menus, track orders, and grow your business effortlessly — all in one place.
     </p>
@@ -198,6 +221,13 @@ body {
 
     <p class="error" th:text="${error}"></p>
 </div>
+
+<script>
+// 🔥 CLOSE BUTTON FUNCTION
+function goBack(){
+    window.history.back();
+}
+</script>
 
 </body>
 </html>

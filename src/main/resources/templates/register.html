@@ -21,7 +21,6 @@ body {
     justify-content: center;
     align-items: center;
 
-    /* 🔥 BEST RESTAURANT BACKGROUND */
     background: linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.70)),
     url("https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1400&q=80")
     no-repeat center center/cover;
@@ -41,6 +40,26 @@ body {
     border: 1px solid rgba(255,255,255,0.25);
     box-shadow: 0 20px 45px rgba(0,0,0,0.35);
     text-align: center;
+
+    /* 🔥 Added */
+    position: relative;
+}
+
+/* 🔥 CLOSE BUTTON */
+.close-btn {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    font-size: 22px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close-btn:hover {
+    color: #ff4d4d;
+    transform: scale(1.2);
 }
 
 /* Title */
@@ -127,6 +146,10 @@ body {
 <body>
 
 <div class="register-container">
+
+    <!-- 🔥 CLOSE BUTTON -->
+    <div class="close-btn" onclick="goBack()">✖</div>
+
     <h2>Restaurant Registration</h2>
     <p class="subtitle">Create your restaurant account and start serving customers.</p>
 
@@ -157,6 +180,13 @@ body {
 
     <p class="error" th:text="${error}"></p>
 </div>
+
+<script>
+// 🔥 CLOSE BUTTON FUNCTION
+function goBack(){
+    window.history.back();
+}
+</script>
 
 </body>
 </html>

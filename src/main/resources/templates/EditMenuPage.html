@@ -22,7 +22,6 @@ body {
     align-items: center;
     padding: 20px;
 
-    /* ✅ Updated Premium Background */
     background:
     linear-gradient(rgba(0,0,0,0.78), rgba(0,0,0,0.75)),
     url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1400&q=80")
@@ -40,6 +39,26 @@ body {
     border: 1px solid rgba(255,255,255,0.25);
     box-shadow: 0 25px 55px rgba(0,0,0,0.45);
     text-align: center;
+
+    /* 🔥 Added */
+    position: relative;
+}
+
+/* 🔥 CLOSE BUTTON */
+.close-btn {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    font-size: 22px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close-btn:hover {
+    color: #ff4d4d;
+    transform: scale(1.2);
 }
 
 .restaurant-name {
@@ -211,9 +230,10 @@ body {
 
 <div class="container">
 
-    <!-- Updated Text -->
-    <div class="restaurant-name">Foodies Hub 🍴</div>
+    <!-- 🔥 CLOSE BUTTON -->
+    <div class="close-btn" onclick="goBack()">✖</div>
 
+    <div class="restaurant-name">Foodies Hub 🍴</div>
     <p class="subtitle">Update your dishes and keep your menu fresh & appealing.</p>
 
     <h2>Edit Dish Details</h2>
@@ -252,7 +272,7 @@ body {
 
         <div class="button-group">
             <button type="submit" class="update-btn">Update Dish</button>
-            <a href="/EditMenuPage" class="cancel-btn">Cancel</a>
+            <a href="/list" class="cancel-btn">Cancel</a>
         </div>
     </form>
 
@@ -260,8 +280,13 @@ body {
 
 </div>
 
-<!-- Live Preview Script -->
 <script>
+// 🔥 CLOSE BUTTON FUNCTION
+function goBack() {
+    window.location.href = "/list"; 
+}
+
+// Image Preview
 document.getElementById("imageFile").addEventListener("change", function(event) {
     const file = event.target.files[0];
     if (file) {

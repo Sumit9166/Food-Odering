@@ -36,6 +36,26 @@ body{
     border:1px solid rgba(255,255,255,0.25);
     box-shadow:0 20px 45px rgba(0,0,0,0.35);
     text-align:center;
+
+    /* 🔥 Added */
+    position: relative;
+}
+
+/* 🔥 CLOSE BUTTON */
+.close-btn{
+    position:absolute;
+    top:18px;
+    right:20px;
+    font-size:22px;
+    color:#fff;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.close-btn:hover{
+    color:#ff4d4d;
+    transform:scale(1.2);
 }
 
 .container h2{
@@ -115,6 +135,10 @@ body{
 <body>
 
 <div class="container">
+
+    <!-- 🔥 CLOSE BUTTON -->
+    <div class="close-btn" onclick="goBack()">✖</div>
+
     <h2>User Login</h2>
     <p class="subtitle">Login to continue your food journey.</p>
 
@@ -137,6 +161,13 @@ body{
         <a th:href="@{/userDetails}">Register</a>
     </div>
 </div>
+
+<script>
+// 🔥 CLOSE BUTTON FUNCTION
+function goBack(){
+    window.history.back();
+}
+</script>
 
 </body>
 </html>

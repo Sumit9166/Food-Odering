@@ -22,6 +22,27 @@ body {
     linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.70)),
     url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&q=80")
     no-repeat center center/cover;
+
+    /* 🔥 Added */
+    position: relative;
+}
+
+/* 🔥 CLOSE BUTTON */
+.close-btn {
+    position: fixed;
+    top: 20px;
+    right: 25px;
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    z-index: 999;
+    transition: 0.3s;
+}
+
+.close-btn:hover {
+    color: #ff4d4d;
+    transform: scale(1.2);
 }
 
 .page-wrapper {
@@ -221,6 +242,9 @@ tbody td {
 </head>
 <body>
 
+<!-- 🔥 CLOSE BUTTON -->
+<div class="close-btn" onclick="goBack()">✖</div>
+
 <div class="page-wrapper">
 
     <div class="top-bar">
@@ -268,10 +292,8 @@ tbody td {
 
                     <td>
                         <div class="action-buttons">
-                            <!-- Change URL according to your backend -->
                             <a th:href="@{'/editMenu/' + ${m.id}}" class="edit-btn">Edit</a>
 
-                            <!-- Change URL according to your backend -->
                             <a th:href="@{'/deleteMenu/' + ${m.id}}"
                                class="delete-btn"
                                onclick="return confirm('Are you sure you want to delete this menu item?')">
@@ -285,6 +307,13 @@ tbody td {
     </div>
 
 </div>
+
+<script>
+// 🔥 CLOSE BUTTON FUNCTION
+function goBack(){
+    window.history.back();
+}
+</script>
 
 </body>
 </html>

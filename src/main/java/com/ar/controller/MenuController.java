@@ -122,10 +122,24 @@ public class MenuController {
     }
 
     @PostMapping("/updateMenu")
-    public String updateMenu(@ModelAttribute Menu menu) {
+    public String updateMenu(@ModelAttribute Menu menu, HttpSession session) {
+
+        Menu existing = menuService.getById(menu.getId());
+
+        // 🔥 restaurant name fix
+        String restaurantName = (String) session.getAttribute("restaurantName");
+        menu.setRestaurantsName(restaurantName);
+
+        // 🔥 image fix
+        if (menu.getImage() == null || menu.getImage().isEmpty()) {
+            menu.setImage(existing.getImage());
+        }
+
         menuService.Update(menu);
+
         return "redirect:/list";
     }
+
 
     @GetMapping("/deleteMenu/{id}")
     public String deleteMenu(@PathVariable int id) {
