@@ -43,7 +43,7 @@ public class LoginController {
             restaurant.getRestaurantName()
         );
 
-        return "redirect:/add";
+        return "redirect:/list";
     }
     
     
