@@ -555,15 +555,22 @@ fetch('/all')
       foodList.innerHTML = "";
 
       if (!data || data.length === 0) {
-          foodList.innerHTML = `<p class="status-message">No food items available.</p>`;
+          foodList.innerHTML = <p class="status-message">No food items available.</p>;
           return;
       }
 
       data.forEach(item => {
+
+          // ✅ Cloudinary + fallback image
+          const imagePath = item.image && item.image.trim() !== ""
+              ? item.image
+              : "https://via.placeholder.com/400x300?text=No+Image";
+
           foodList.innerHTML += `
             <div class="food-card">
-           
-                <img src="${item.image}" alt="${item.name}">
+                <img src="${imagePath}" 
+                     onerror="this.src='https://via.placeholder.com/400x300?text=Image+Error'" 
+                     alt="${item.name}">
                 <div class="content">
                     <h3>${item.name}</h3>
                     <p class="restaurant-name">${item.restaurantsName}</p>
@@ -583,21 +590,6 @@ fetch('/all')
         <p class="status-message">Failed to load food items. Please check API or backend server.</p>
       `;
   });
-
-function openLoginPopup() {
-    document.getElementById("loginModal").style.display = "flex";
-}
-
-function closeLoginPopup() {
-    document.getElementById("loginModal").style.display = "none";
-}
-
-window.onclick = function(event) {
-    const modal = document.getElementById("loginModal");
-    if (event.target === modal) {
-        modal.style.display = "none";
-    }
-}
 </script>
 
 <footer>

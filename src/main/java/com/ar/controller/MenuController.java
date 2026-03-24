@@ -13,12 +13,16 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ar.entity.Menu;
+import com.ar.service.CloudinaryService;
 import com.ar.service.MenuService;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class MenuController {
+	
+	@Autowired
+	private CloudinaryService cloudinaryService;
 
     @Autowired
     private MenuService menuService;
@@ -29,14 +33,13 @@ public class MenuController {
         model.addAttribute("menu", new Menu());
         return "addMenu";
     }
-
-    // 👉 SAVE MENU (IMAGE + DATA)
+    
+    
     @PostMapping("/addMenu")
     public String saveMenu(@ModelAttribute Menu menu,
                            @RequestParam("imageFile") MultipartFile imageFile,
                            HttpSession session) throws IOException {
 
-        // 🔹 Session se restaurant name lo
         String restaurantName = (String) session.getAttribute("restaurantName");
 
         if (restaurantName == null) {
@@ -45,33 +48,62 @@ public class MenuController {
 
         menu.setRestaurantsName(restaurantName);
 
-        // 🔥 IMAGE UPLOAD FIX
         if (!imageFile.isEmpty()) {
-
-            String fileName = System.currentTimeMillis() + "_" + imageFile.getOriginalFilename();
-
-            // 👉 Project root uploads folder
-            String uploadDir = System.getProperty("user.dir") + "/uploads/";
-
-            Path uploadPath = Paths.get(uploadDir);
-
-            // folder create agar nahi hai
-            if (!Files.exists(uploadPath)) {
-                Files.createDirectories(uploadPath);
-            }
-
-            // file save
-            Path filePath = uploadPath.resolve(fileName);
-            Files.write(filePath, imageFile.getBytes());
-
-            // DB me path save
-            menu.setImage("/uploads/" + fileName);
+            String imageUrl = cloudinaryService.uploadImage(imageFile);
+            menu.setImage(imageUrl);
         }
 
         menuService.saveMenu(menu);
 
         return "redirect:/list";
     }
+    
+    
+    
+    
+
+    // 👉 SAVE MENU (IMAGE + DATA)
+//    @PostMapping("/addMenu")
+//    public String saveMenu(@ModelAttribute Menu menu,
+//                           @RequestParam("imageFile") MultipartFile imageFile,
+//                           HttpSession session) throws IOException {
+//
+//        // 🔹 Session se restaurant name lo
+//        String restaurantName = (String) session.getAttribute("restaurantName");
+//
+//        if (restaurantName == null) {
+//            return "redirect:/login";
+//        }
+//
+//        menu.setRestaurantsName(restaurantName);
+//
+//        // 🔥 IMAGE UPLOAD FIX
+//        if (!imageFile.isEmpty()) {
+//
+//            String fileName = System.currentTimeMillis() + "_" + imageFile.getOriginalFilename();
+//
+//            // 👉 Project root uploads folder
+//            String uploadDir = System.getProperty("user.dir") + "/uploads/";
+//
+//            Path uploadPath = Paths.get(uploadDir);
+//
+//            // folder create agar nahi hai
+//            if (!Files.exists(uploadPath)) {
+//                Files.createDirectories(uploadPath);
+//            }
+//
+//            // file save
+//            Path filePath = uploadPath.resolve(fileName);
+//            Files.write(filePath, imageFile.getBytes());
+//
+//            // DB me path save
+//            menu.setImage("/uploads/" + fileName);
+//        }
+//
+//        menuService.saveMenu(menu);
+//
+//        return "redirect:/list";
+//    }
 
     // 👉 MENU LIST (Thymeleaf)
     @GetMapping("/list")
