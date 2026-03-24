@@ -493,8 +493,9 @@ footer span {
         </nav>
 
         <button class="login-btn" onclick="openLoginPopup()">Login</button>
-        <a herf= "/loginn">
-        </a>
+      <!--    <a href= "/loginn">
+        </a>   -->
+        
     </div>
 </header>
 
@@ -543,6 +544,15 @@ footer span {
 </div>
 
 <script>
+     
+     // 🔥 FIXED LOGIN FUNCTIONS
+function openLoginPopup(){
+    document.getElementById("loginModal").style.display="flex";
+}
+function closeLoginPopup(){
+    document.getElementById("loginModal").style.display="none";
+}
+     
     let allFoods = [];
 
     function goToOrder(foodId) {
@@ -554,7 +564,7 @@ footer span {
         foodList.innerHTML = "";
 
         if (!data || data.length === 0) {
-            foodList.innerHTML = <div class="status-message">No food items found.</div>;
+            foodList.innerHTML = `<div class="status-message">No food items found.</div>`;
             return;
         }
 
